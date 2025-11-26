@@ -14,23 +14,24 @@ Proyecto Express + TypeScript que expone endpoints para chistes (consumo de APIs
    cd chistes-api
 
 2. Instala dependencias:
-```bash
-npm install
+   ```bash
+   npm install
 
 3. Crea la BD y ejecuta scripts SQL:
-createdb chistesdb
-psql -d chistesdb -f sql/schema.sql
-psql -d chistesdb -f sql/seed.sql
+   ```bash
+   createdb chistesdb
+   psql -d chistesdb -f sql/schema.sql
+   psql -d chistesdb -f sql/seed.sql
 
 4. Scripts:
-```bash
-npm run dev — arranca server en modo desarrollo (ts-node-dev)
+  ```bash
+   npm run dev — arranca server en modo desarrollo (ts-node-dev)
 
-npm run build — transpila TypeScript a JS
+   npm run build — transpila TypeScript a JS
 
-npm start — arranca la app (usar después de build)
+   npm start — arranca la app (usar después de build)
 
-npm test — corre tests unitarios (Jest)
+   npm test — corre tests unitarios (Jest)
 
 5. Endpoints:
 
@@ -59,28 +60,29 @@ GET /api/math/lcm?numbers=2,3,4 — devuelve MCM (LCM)
 GET /api/math/inc?number=5 — devuelve 6
 
 7. Test:
-```bash
-npm test
+  ```bash
+  npm test
 
 ## Ejemplos de uso (curl)
 
-Obtener chiste aleatorio:
+# Obtener chiste aleatorio:
 ```bash
-curl http://localhost:3000/api/chistes
+  curl http://localhost:3000/api/chistes
 
-Obtener chiste de Chuck:
-curl http://localhost:3000/api/chistes/Chuck
+# Obtener chiste de Chuck:
+```bash
+  curl http://localhost:3000/api/chistes/Chuck
 
 Crear chiste:
-
+```bash
 curl -X POST http://localhost:3000/api/chistes -H "Content-Type: application/json" \
   -d '{"texto":"Mi chiste nuevo","usuario":"Carlos","tematica":"humor negro"}'
 
 
 Emparajados:
-
+```bash
 curl http://localhost:3000/api/chistes/emparejados
 
 LCM:
-
+```bash
 curl "http://localhost:3000/api/math/lcm?numbers=3,4,6"
