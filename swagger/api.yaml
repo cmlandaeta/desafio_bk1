@@ -1,0 +1,128 @@
+openapi: 3.0.1
+info:
+  title: Chistes API
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api
+paths:
+  /chistes:
+    get:
+      summary: Obtener un chiste aleatorio (sin path param). Si se añade path param en /chistes/{source}, se usará la fuente.
+      responses:
+        "200":
+          description: Chiste obtenido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  joke:
+                    type: string
+    post:
+      summary: Guardar chiste en BD
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                texto:
+                  type: string
+                usuario:
+                  type: string
+                tematica:
+                  type: string
+              required:
+                - texto
+      responses:
+        "201":
+          description: Chiste creado
+  /chistes/{source}:
+    get:
+      summary: Obtener chiste de fuente específica. source puede ser "Chuck" o "Dad"
+      parameters:
+        - in: path
+          name: source
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: Chiste
+        "400":
+          description: Fuente inválida
+  /chistes/{number}:
+    put:
+      summary: Actualiza chiste por id (number)
+      parameters:
+        - in: path
+          name: number
+          required: true
+          schema: { type: integer }
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                texto: { type: string }
+      responses:
+        "200": { description: actualizado }
+    delete:
+      summary: Elimina chiste por id
+      parameters:
+        - in: path
+          name: number
+          required: true
+          schema: { type: integer }
+      responses:
+        "200": { description: eliminado }
+  /chistes/emparejados:
+    get:
+      summary: Lanza 5 peticiones a Chuck y 5 a Dad, empareja y devuelve array combinado
+      responses:
+        "200":
+          description: Lista emparejada
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    chuck: { type: string }
+                    dad: { type: string }
+                    combinado: { type: string }
+
+  /math/lcm:
+    get:
+      summary: Devuelve el MCM (LCM) de una lista de enteros pasados en query param 'numbers' (ej: ?numbers=2,3,4)
+      parameters:
+        - in: query
+          name: numbers
+          schema: { type: string }
+          required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lcm: { type: integer }
+  /math/inc:
+    get:
+      summary: Devuelve number + 1, receive query param 'number'
+      parameters:
+        - in: query
+          name: number
+          schema: { type: integer }
+          required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result: { type: integer }
