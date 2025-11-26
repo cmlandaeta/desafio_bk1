@@ -14,6 +14,7 @@ Proyecto Express + TypeScript que expone endpoints para chistes (consumo de APIs
    cd chistes-api
 
 2. Instala dependencias:
+```bash
 npm install
 
 3. Crea la BD y ejecuta scripts SQL:
@@ -22,6 +23,7 @@ psql -d chistesdb -f sql/schema.sql
 psql -d chistesdb -f sql/seed.sql
 
 4. Scripts:
+```bash
 npm run dev — arranca server en modo desarrollo (ts-node-dev)
 
 npm run build — transpila TypeScript a JS
@@ -57,7 +59,7 @@ GET /api/math/lcm?numbers=2,3,4 — devuelve MCM (LCM)
 GET /api/math/inc?number=5 — devuelve 6
 
 7. Test:
-
+```bash
 npm test
 
 ## Ejemplos de uso (curl)
